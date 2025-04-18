@@ -37,7 +37,7 @@ This script requires the following Python libraries:
 ## Usage
 
 1. Run the script:
-```bash
+``'bash
 python password_generator.py
 ```
 
@@ -70,7 +70,7 @@ This project is open source and available under the MIT License.
 
 ## Author
 
-[Arib Khan]
+**Arib Khan**
 
 ---
 
