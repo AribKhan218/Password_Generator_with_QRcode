@@ -4,19 +4,74 @@ This is a simple Python script that generates random passwords and provides the 
 
 ## Features
 
-- Generates random passwords with customizable length and character composition.
-- Provides options for including uppercase letters, lowercase letters, digits, and special symbols in passwords.
-- Allows you to generate a QR code image for the generated password, making it easy to share or store securely.
+- Generate secure random passwords with lengths between 8-50 characters
+- Includes a diverse character set:
+  - Numbers (1-9)
+  - Uppercase letters (A-Z)
+  - Lowercase letters (a-z)
+  - Special characters (!@#$%^&*)
+- Input validation to ensure password length requirements
+- QR code generation for easy password sharing
+- Error handling for QR code generation
+- User-friendly command-line interface
 
-## Usage
+## Installation
 
-1. Clone the repository or download the `password_generator.py` file.
-2. Run the script using your Python interpreter.
-3. Follow the prompts to specify the password length and character types to include.
-4. The script will display the generated password and save a QR code image in the same directory (if selected).
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/Password_Generator_with_QRcode.git
+cd Password_Generator_with_QRcode
+```
+
+2. Install the required dependencies:
+```bash
+pip install qrcode[pil]
+```
 
 ## Dependencies
 
-This script requires the following library:
+This script requires the following Python libraries:
+- `qrcode`: For generating QR codes
+- `Pillow (PIL)`: For image processing (required by qrcode)
 
-- `qrcode`: You can install it using `pip`
+## Usage
+
+1. Run the script:
+```bash
+python password_generator.py
+```
+
+2. Follow the interactive prompts:
+   - Enter desired password length (8-50 characters)
+   - Choose whether to generate a QR code (y/n)
+
+3. The script will:
+   - Display your generated password
+   - If requested, create a QR code image named `qrcode.png` in the current directory
+
+## Output
+
+- Generated password will be displayed in the console
+- QR code image (if selected) will be saved as `qrcode.png`
+
+## Error Handling
+
+- Validates password length input (must be between 8-50 characters)
+- Handles invalid numeric inputs
+- Manages QR code generation errors gracefully
+
+## Contributing
+
+Feel free to fork this repository and submit pull requests to contribute to this project.
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Author
+
+[Arib Khan]
+
+---
+
+**Note:** Always store your passwords securely and never share them through unsecured channels.
