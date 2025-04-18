@@ -1,25 +1,53 @@
-import random, os, qrcode
+import random
+import os
+import qrcode
+from PIL import Image
 
-char="123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*"
+CHARS = "123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*"
 
+def get_valid_length():
+    while True:
+        try:
+            length = int(input("Enter your password length (8-50): "))
+            if 8 <= length <= 50:
+                return length
+            print("Please enter a length between 8 and 50")
+        except ValueError:
+            print("Please enter a valid number")
 
-len = int(input("enter your password length\n"))
-password=''
-for i in range(len):
-    password += random.choice(char)     #password string will store random characters till loop last
+def generate_password(length):
+    return ''.join(random.choice(CHARS) for _ in range(length))
 
-print("Your generated passowrd is:",password)
+def save_qr_code(password):
+    try:
+        qr_text = f"Your Generated password is: {password}"
+        img = qrcode.make(qr_text)
+        path = os.path.join(os.getcwd(), "qrcode.png")
+        img.save(path)
+        return path
+    except Exception as e:
+        print(f"Error generating QR code: {e}")
+        return None
 
-ch=int(input("Want to make your password QR code:\n1. for yes\nrest. for no:\n"))
+def main():
+    password_length = get_valid_length()
+    password = generate_password(password_length)
+    print("Your generated password is:", password)
 
-if(ch==1):
-    password="Your Generated password is:"+password     #this message will going to store in qrcode image because qrcode.make() can't take 2 parameters
-    img=qrcode.make(password)       #qrcode created
-    path=os.getcwd()+"\qrcode.png"  #we get our current path with "\qrcode.png" name in it, if already .png file exist it will rewrite in it
-    img.save(path)      #image saved at given path
-    print("Your qrcode has been generated at",path)
-else:
-    print("no problem")
+    while True:
+        choice = input("Want to make your password QR code (y/n): ").lower()
+        if choice == 'y':
+            path = save_qr_code(password)
+            if path:
+                print("Your qrcode has been generated at", path)
+            break
+        elif choice == 'n':
+            print("\nThanks for using!")
+            break
+        else:
+            print("\nPlease enter 'y' or 'n'")
 
+    print("\n" + "*" * 40 + "\n\nThank you for using our work\n\n" + "*" * 40)
 
-print("**************************************\n\nThank you for using our work\n\n**************************************")
+if __name__ == "__main__":
+    main()
